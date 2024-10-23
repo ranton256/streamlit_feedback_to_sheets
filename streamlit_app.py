@@ -1,4 +1,4 @@
-import sys
+from traceback import TracebackException
 import random
 
 import pandas as pd
@@ -13,7 +13,8 @@ except Exception as e:
     st.write(f"Unable to connect to storage: {e}")
     conn = None
     print("Connection failed")
-    sys.print_exception(e)
+    TracebackException.from_exception(e).print()
+
 
 df = conn.read()
 
@@ -28,7 +29,7 @@ def append_row(df, row):
 
 
 if 'my_random_id' not in st.session_state:
-    st.session_state['my_random_id'] = random.randint(1,10000000)
+    st.session_state['my_random_id'] = random.randint(1, 10000000)
 
 request_id = st.session_state['my_random_id']
 st.write(f"request_id={request_id}")
@@ -43,8 +44,6 @@ with st.sidebar:
             st.rerun()
 
     with st.form(key="feedback"):
-
-
         sentiment_mapping = ["one", "two", "three", "four", "five"]
         rating = st.feedback("stars")
         if rating is not None:
@@ -53,7 +52,8 @@ with st.sidebar:
 
         comment = st.text_input("Comment", "")
         email = st.text_input("[Optional]: Enter your Email if you would like to discuss", "")
-        user = str(st.experimental_user.to_dict())
+
+        exp_user_email = ''
         if st.experimental_user.email:
             exp_user_email = st.experimental_user.email
         st.write(f"Your exp_user_email is {exp_user_email}")
