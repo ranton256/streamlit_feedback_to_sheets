@@ -12,6 +12,8 @@ st.set_page_config(
         layout="wide",
     )
 
+st.header("Save Streamlit feedback to Google sheets")
+
 st.markdown("""This app demonstrates using collecting user feedback from a Streamlit app into a Google sheet, 
 
 - It uses the [st.feedback](https://docs.streamlit.io/develop/api-reference/widgets/st.feedback) widget 
