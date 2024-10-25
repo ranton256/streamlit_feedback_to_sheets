@@ -6,6 +6,12 @@ import streamlit as st
 
 from streamlit_gsheets import GSheetsConnection
 
+st.set_page_config(
+        page_title="Streamlit Feedback to Sheets Example",
+        page_icon=":rocket:",
+        layout="wide",
+    )
+
 # Create a connection object.
 try:
     conn = st.connection("gsheets", type=GSheetsConnection)
@@ -33,6 +39,7 @@ if 'my_random_id' not in st.session_state:
 
 request_id = st.session_state['my_random_id']
 st.write(f"request_id={request_id}")
+
 
 with st.sidebar:
     mask = df['request_id'].isin([request_id])
