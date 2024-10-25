@@ -12,6 +12,17 @@ st.set_page_config(
         layout="wide",
     )
 
+st.markdown("""This app demonstrates using collecting user feedback from a Streamlit app into a Google sheet, 
+
+- It uses the [st.feedback](https://docs.streamlit.io/develop/api-reference/widgets/st.feedback) widget 
+- It uses the [gsheets-connection](https://github.com/streamlit/gsheets-connection) package to save and load feedback, making it easy to collect user feedback without setting up a database as a backend.
+
+The code is available at <https://github.com/ranton256/streamlit_feedback_to_sheets>.
+
+""")
+
+st.subheader("Feedback so far")
+
 # Create a connection object.
 try:
     conn = st.connection("gsheets", type=GSheetsConnection)
@@ -39,16 +50,7 @@ if 'my_random_id' not in st.session_state:
 
 request_id = st.session_state['my_random_id']
 
-st.markdown("""This app demonstrates using collecting user feedback from a Streamlit app into a Google sheet, 
 
-- It uses the [st.feedback](https://docs.streamlit.io/develop/api-reference/widgets/st.feedback) widget 
-- It uses the [gsheets-connection](https://github.com/streamlit/gsheets-connection) package to save and load feedback, making it easy to collect user feedback without setting up a database as a backend.
-
-The code is available at <https://github.com/ranton256/streamlit_feedback_to_sheets>.
-
-""")
-
-st.subheader("Feedback so far")
 
 with st.sidebar:
     mask = df['request_id'].isin([request_id])
